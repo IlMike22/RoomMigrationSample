@@ -15,7 +15,11 @@ class MainActivity : ComponentActivity() {
             "users.db"
         ).build()
 
-        (1..10).forEach {
+        lifecycleScope.launch {
+            database.dao.getUsers().forEach(::println)
+        }
+
+       /* (1..10).forEach {
             lifecycleScope.launch {
                 database.dao.insertUser(
                     User(
@@ -24,7 +28,7 @@ class MainActivity : ComponentActivity() {
                     )
                 )
             }
-        }
+        }*/
 
     }
 }
