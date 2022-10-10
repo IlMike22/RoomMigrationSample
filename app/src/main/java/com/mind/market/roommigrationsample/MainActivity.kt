@@ -1,6 +1,7 @@
 package com.mind.market.roommigrationsample
 
 import android.os.Bundle
+import android.service.autofill.UserData
 import androidx.activity.ComponentActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.room.Room
@@ -13,22 +14,21 @@ class MainActivity : ComponentActivity() {
             applicationContext,
             UserDatabase::class.java,
             "users.db"
-        ).build()
+        ).addMigrations(UserDatabase.migration3To4).build()
 
         lifecycleScope.launch {
-            database.dao.getUsers().forEach(::println)
+            database.dao.getSchools().forEach(::println)
         }
 
-       /* (1..10).forEach {
+        (1..10).forEach {
             lifecycleScope.launch {
-                database.dao.insertUser(
-                    User(
-                        email = "test@test$it.com",
+                database.dao.insertSchool(
+                    School(
                         name = "test$it"
                     )
                 )
             }
-        }*/
+        }
 
     }
 }
